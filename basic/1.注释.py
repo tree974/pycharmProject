@@ -1,4 +1,4 @@
-# ---- 注释 ----
+# -------- 注释 --------
 # 单行注释
 """
 多行注释，但不能嵌套
@@ -6,7 +6,7 @@
 print("""这是字符串,不是注释""")
 
 
-# ---- 变量 ----
+# -------- 变量 --------
 var1 =2
 var2 = 3
 result = var1 + var2
@@ -23,7 +23,7 @@ var4,var5 = var5,var4
 print(var4,var5,var6)
 print(f"var1的值: {var1}")
 
-#  ---- 标识符 ----
+#  -------- 标识符 --------
 """
 命名规则: 
 只能包含字母、数字和下划线，且不能以数字开头
@@ -41,11 +41,21 @@ print(Name, name)
 from keyword import kwlist
 print(kwlist)
 
-# ---- 常量 ----
+# -------- 常量 --------
 # 没有特别约束,一般用大写表示,后面最好不要修改值
 PI = 3.14
 print(PI)
 
+# -------- 进制 --------
+# 二进制以0b开头
+binary_number = 0b1010
+print("二进制数为：",binary_number)
+# 八进制以0o开头
+octal_number = 0o12
+print("八进制数为：",octal_number)
+# 十六进制以0x开头
+hex_number = 0xA
+print("十六进制数为：", hex_number)
 
 
 
