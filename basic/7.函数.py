@@ -1,18 +1,31 @@
-def printStar():
-    row = 2
-    while row > 0:
-        print("*"*3)
-        row -= 1
+# 引用: 参数分可变类型和不可变类型
+def change(a):
+    print(id(a))
+    a=10
+    print(id(a))
+b = 2 # 小整数池指向同一个对象,所以如果b=10,那么id还是相等; 否则,不等
+change(b)
 
-printStar()
+def changeList(myList):
+    print(id(myList))
+    # myList *= 2 # id不会变
+    myList = myList * 2
+    print(myList) # [1, 2, 3, 1, 2, 3]
+    print(id(myList))
+myList = [1,2,3]
+print(id(myList))
+changeList(myList) # [1, 2, 3, 1, 2, 3]
+print(myList)
 
+# 参数形式
 def printIn(a,b,c):
     print(a+b+c)
 printIn(a=1,b=2,c=3) #关键字传参
 
 def printInfo(num, *args): # 不定长参数,一个*表示传入的是不定长元组
     print(num)
-    print(*args)
+    print(args) # ('a', 'b', 'c')
+    print(type(args)) # <class 'tuple'>
 printInfo(3,"a","b","c")
 
 def printInfo1(num, **kwargs): # 两个**表示传入的是不定长字典
