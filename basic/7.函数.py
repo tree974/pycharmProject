@@ -81,6 +81,7 @@ function_outer()
 
 
 # ---- 匿名函数: 不用def来定义的函数,使用lambda定义 ----
+# lambda的作用: 创建一个匿名函数,返回这个函数对象
 # 不用匿名函数
 def opeartor(a,b):
     return a+b
@@ -89,17 +90,18 @@ def func(a, b, opeartor):
 print(func(1, 2, opeartor))
 
 # 用匿名函数
-print(func(1, 2, lambda a,b: a+b))
+print(func(1, 2, lambda a,b: a+b)) # lambda后面跟的是参数,冒号后面跟的是返回值
 
 
 student_list = [{"name": "zhang3", "age": 36}, {"name": "li4", "age": 14}, {"name": "wang5", "age": 27}]
-print(sorted(student_list, key=lambda x: x["age"]))
+print("按照age排序: ",sorted(student_list, key=lambda x: x["age"]))
 
 map_result = map(lambda x: x * x, [0, 1, 3, 7, 9]) # map返回的也是迭代器
 print(list(map_result)) # [0, 1, 9, 49, 81]
 
 
 # ---- 函数的注释----
-def dog(name:str, age:(1,99), species:'狗狗的品种') -> tuple: #返回值的注释用->
+# 注释不影响默认值,但是有默认值的参数要放在没有默认值的后面
+def dog(name:str, age:(1,99), species:'狗狗的品种'="哈巴狗") -> tuple: #返回值的注释用->
     return (name, age, species)
 print(dog.__annotations__) #{'name': <class 'str'>, 'age': (1, 99), 'species': '狗狗的品种', 'return': <class 'tuple'>}
