@@ -60,3 +60,7 @@ for i in range(3):
 funcs[0]() #0
 funcs[1]() #1
 funcs[2]() #2
+
+# 注意区别: 都是存的函数对象,但存的不一样
+# 1.是inner() print(i)、inner() print(i)、inner() print(i) ,一个是变量
+# 2.是inner(0) print(n=0)、inner(1) print(1)、inner(2) print(2), 一个是常量
