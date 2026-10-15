@@ -44,9 +44,9 @@ funcs = []
 for i in range(3):
     def inner():
         print(i) # 注意,这个i每次都会变化,所以最后实际上i=2
-    funcs.append(inner)
+    funcs.append(inner) # 只是append了函数对象,没有调用.等真正调用的时候i已经为最新值了
 
-funcs[0]()  # 2
+funcs[0]()  # 2,加了()才是真正去调用
 funcs[1]()  # 2
 funcs[2]()  # 2
 
