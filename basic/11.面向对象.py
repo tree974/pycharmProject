@@ -5,32 +5,55 @@ class Person:
     home = "earth"
     def __init__(self, name, age): # 构造方法,self相当于创建对象的实例,比如 x = Person("zs",10),那self=x
                                    # 自动将p这个新建对象传给init的第一个参数self
+                                   # 构造方法只能返回None
         self.name = name
         self.age = age
 
-    def eat(self):
+    def eat(self): # 实例方法(非静态方法)第一个形参是该对象,必须要加上,调用的时候可以不传入
         print("eating...")
 
     def drink(self):
         print("drinking...")
 
+    @classmethod
+    def get_home(cls):
+        return cls.home
+
+    @staticmethod
+    def static_method(): # 无法访问类或实例的信息,更像是一个工具类,为了方便组织代码,把它放在了类里面
+        print("这是静态方法")
+
+
 home = Person.home # 获取一个字符串
 eat_func = Person.eat
 doc = Person.__doc__
 
-print(home)
-print(eat_func)
-print(doc)
-
+print(home) #  earth
+print(eat_func) # <function Person.eat at 0x0000018BA0457380>
+print(doc) # 人的类
 
 p = Person("zs", 18)
 print(p)
 print(p.name)
 print(p.age)
-p.eat() # 相当于调用了Person.eat(p)
+p.eat() # 相当于调用了Person.eat(p) # eating...
+print("调用类方法:"+Person.get_home())  # earth
+print("调用类方法:",Person.get_home())  #  earth,如果双引号后跟的逗号,那么输出时逗号位置就是空格
+Person.static_method()
+p.static_method()
 
+# 也可以在类外定义方法,将一个函数对象赋值给类变量
+def f1(self, x, y):
+    print(x * y)
+class C:
+    f = f1
 
+    def f2(self):
+        # self.f = f1
+        return self
 
+C().f(6,1)
+C().f2().f(6,1)
 
 # ---- 封装 ----
 # 私有化:为了限制属性和方法只能在类内访问,外部无法访问; 或父类中某些属性和方法不希望被子类继承
