@@ -22,9 +22,9 @@ class Person:
     @property
     def name(self): # 将方法名设置为去掉双下划线的私有属性名称,就变成了只读属性?但私有属性本身怎么修改呢
         return self.__name # 变成了只读属性,p.name = '李四'报错
-    # @name.setter
-    # def name(self, new_name):
-    #     self.__name = new_name # 变成了读写属性,可通过p.name = '李四'
+    @name.setter
+    def name(self, new_name):
+        self.__name = new_name # 变成了读写属性,可通过p.name = '李四'
 
 p = Person("张三")
 # 访问私有属性的两种方式:
