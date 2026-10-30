@@ -45,7 +45,7 @@ class YellowRace(Person):
         print(f"父类的私有属性: {self.age}") # 由于子类没有这个属性,所以调用的是父类
         self.get_drink() # 由于子类没有这个方法,所以调用的是父类
         self.__run() # 这是直接调用的子类本身的方法
-        self.run # 这是通过@property定义的run方法,调用的父类run方法,进而获取父类__run私有方法
+        self.run # 这是通过@property定义的run方法,此时就是属性run,而不是方法run,所以不用加();然后调用的父类run方法,进而获取父类__run私有方法
 
 y = YellowRace(10,"张三")
 y.test()
