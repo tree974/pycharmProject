@@ -1,5 +1,5 @@
 # __all__只有2个元素
-from PackageOp import *  # 局部导入from import
+from PackageOp import *  # 局部导入from import, __all__只对import *有效
 print(add(1, 2))
 print(num)
 # print(num1) # NameError: name 'num1' is not defined. Did you mean: 'num'?
