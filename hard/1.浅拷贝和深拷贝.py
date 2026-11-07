@@ -1,7 +1,7 @@
 # python高级语法：浅拷贝和深拷贝
 """
 直接赋值：对象的引用(别名), 不产生拷贝
-浅拷贝：拷贝父对象,不会拷贝对象的内部的子对象。拷贝后只有第一层是独立的
+浅拷贝：拷贝父对象,不会拷贝对象的内部的子对象。拷贝后只有第一层是独立的(独立: 修改这一份,不会影响另一份)
     1. 切片操作,如[:]
     2. 使用工厂函数,如list(), set()
     3. 使用copy模块的copy()函数
@@ -9,6 +9,10 @@
 
 不管是浅拷贝还是深拷贝,子对象如果是可变类型,对可变类型进行值的改变,都不会使地址发生变化.
 只有深拷贝后的新对象中的可变类型地址,拷贝完后会发生变化
+
+            地址是否发生变化                        适用场景
+浅拷贝 新对象本身地址会变,可变类型子对象地址不会变  ①单层容器,元素都是不可变类型;或者②有嵌套容器,想改外层,内层只读不改
+深拷贝 新对象本身地址会变,可变类型子对象地址会变    有嵌套容器,后面需要修改内层
 """
 
 
@@ -23,13 +27,17 @@ print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3]))
 
 # 1.修改list1中的元素
 list1[0] = 100
-print(id(list1), id(list1[0]),id(list1[1]),id(list1[2]),id(list1[3])) # list1[0]为不可变元素,所以值变后,指向了一个新的对象,地址就变了
-print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3])) # 由于list2是copy后的新对象,里面的list2[0]并没有变,所以地址没变
+print(id(list1), id(list1[0]),id(list1[1]),id(list1[2]),id(list1[3]))
+# list1[0]为不可变元素,所以值变后,指向了一个新的对象,地址就变了
+print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3]))
+# 由于list2是copy后的新对象,里面的list2[0]并没有变,所以地址没变
 
 # 2.修改list1[3]可变元素中的元素
 list1[3].append(7)
-print(id(list1), id(list1[0]),id(list1[1]),id(list1[2]),id(list1[3])) # list1[3]是可变元素,里面元素发生变化,并不会导致地址变化
-print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3])) # list2[3]指向的也是list1[3],地址也没变
+print(id(list1), id(list1[0]),id(list1[1]),id(list1[2]),id(list1[3]))
+# list1[3]是可变元素,里面元素发生变化,并不会导致地址变化
+print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3])) #
+# list2[3]指向的也是list1[3],地址也没变
 # print(list2[3])
 
 
@@ -47,13 +55,17 @@ print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3]))
 
 # 1.修改list1中的元素
 list1[0] = 100
-print(id(list1), id(list1[0]),id(list1[1]),id(list1[2]),id(list1[3])) # list1[0]为不可变元素,所以值变后,指向了一个新的对象,地址就变了
-print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3])) # 由于list2是copy后的新对象,里面的list2[0]并没有变,所以地址没变
+print(id(list1), id(list1[0]),id(list1[1]),id(list1[2]),id(list1[3]))
+# list1[0]为不可变元素,所以值变后,指向了一个新的对象,地址就变了
+print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3]))
+# 由于list2是copy后的新对象,里面的list2[0]并没有变,所以地址没变
 
 # 2.修改list1[3]可变元素中的元素
 list1[3].append(7)
-print(id(list1), id(list1[0]),id(list1[1]),id(list1[2]),id(list1[3])) # list1[3]是可变元素,里面元素发生变化,并不会导致地址变化
-print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3])) # list2[3]指向的本来就不是list1[3],所以值不会变
+print(id(list1), id(list1[0]),id(list1[1]),id(list1[2]),id(list1[3]))
+# list1[3]是可变元素,里面元素发生变化,并不会导致地址变化
+print(id(list2), id(list2[0]),id(list2[1]),id(list2[2]),id(list2[3]))
+# list2[3]指向的本来就不是list1[3],所以值不会变
 print(list2[3]) # 打印的不是list1[3]的值了: [4, 5, 6]
 
 
