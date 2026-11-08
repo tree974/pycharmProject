@@ -12,11 +12,15 @@ def times(n):
         return inner1
     return get_absolute1
 
-@times(2)
+@times(2) # 等价于func2 = (times(2))(func2)
 def func2(x):
     return sqrt(x)
 
 print(func2(-16))
+"""
+func2 = (times(2))(func2)=get_absolute1(func2) = inner1
+func2(-16)  -> inner1(-16) -> x = f(16) = 4 -> x = f(4) = 2 -> 2
+"""
 
 
 # ----类装饰器:包含__call__()方法的类,接收函数作为参数,并返回新的函数----
