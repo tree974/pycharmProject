@@ -2,7 +2,7 @@
 """
 1. 线程是处理器任务调度和执行的基本单位
 2. 一个进程至少有1个线程,也可以运行多个线程
-3. 多个线程间可共享数据
+3. 多个线程间可共享数据(进程间是不能共享的,除非用queue)
 4. 多线程指在同一进程中同时执行多个任务
 """
 import threading
@@ -16,13 +16,14 @@ import threading
 def func():
     flag = 0
     while True:
-        print(threading.current_thread().name, f"flag" * 5) # 源码一行代码，都不代表原子操作，操作系统随时可以发生线程切换.
-        # 所以,可能会出现 线程2线程1  flagflagflagflagflagflagflagflagflagflag 这样的打印
+        print(threading.current_thread().name, f"{flag}" * 5)
+        # 这一行代码，都不代表原子操作，操作系统随时可以发生线程切换.
+        # 所以,可能会出现 线程2线程1  00000 00000 这样的打印
         flag = flag ^ 1
         time.sleep(0.5)
 
 if __name__ == '__main__':
-    t1 = threading.Thread(target=func, name="线程1")
+    t1 = threading.Thread(target=func, name="线程1") # 进程是multiprocessing.Process
     t2 = threading.Thread(target=func, name="线程2")
     t1.start()
     t2.start()

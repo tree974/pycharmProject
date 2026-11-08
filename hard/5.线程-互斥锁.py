@@ -2,6 +2,9 @@
 import time
 import threading
 
+# 有3个线程,每次都使用同一个全局变量g_num,然后+1;
+# 正确结果应该是3个线程都执行10次+1操作,最后g_num=30
+# 但因为线程之间存在线程安全问题,线程a时tmp=0+1=1,此时还没往下面走g_num=tmp,结果线程b直接获取到g_num=0,开始计算
 def func():
     global g_num # 告诉 Python，下面代码里的g_num，去全局作用域找，不要在函数内新建局部变量
     for _ in range(10): # _:普通变量名,当下面代码不会用到时,可以使用_
@@ -23,6 +26,8 @@ if __name__ == '__main__':
 def func1():
     global g_num
     for _ in range(10):
+        # python变量查找规则: 局部->外部函数->全局
+        # 只读取lock,不用加global
         lock.acquire(blocking=True) #获取锁,当blocking=True,线程B一直等待线程A释放锁,=False,如果还在上锁,那么放弃本次操作,不执行下面的逻辑
         tmp = g_num + 1
         time.sleep(0.1)
@@ -35,4 +40,4 @@ if __name__ == '__main__':
     threads = [threading.Thread(target=func1,name=f"线程{i}") for i in range(3)]
     [t.start() for t in threads]
     [t.join() for t in threads]
-    print(g_num)
+    print(g_num) # 30
