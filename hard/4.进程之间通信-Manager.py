@@ -3,18 +3,23 @@ import random
 import time
 
 
-# 间隔随机时间向queue中放入随机数
+# 间隔0.1s向queue中放入随机数
 def func1(queue):
-    while True:
+    for i in range(5):
         queue.put(random.randint(1, 50))
         time.sleep(0.1)
+    queue.put(None)
 
 # 从queue中取出数据
 def func2(queue):
     while True:
-       print("="* queue.get())
+        time.sleep(0.1)
+        data = queue.get()
+        if data is None:
+            break;
+        print("="* data)
 
-# ---- 进程池之间使用Manager().Queue----
+# ---- 进程池中的进程之间使用Manager().Queue----
 if __name__ == "__main__":
     queue = multiprocessing.Manager().Queue()
     pool = multiprocessing.Pool(processes=2)

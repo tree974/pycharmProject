@@ -22,7 +22,7 @@ def read_file():
     with open("test.txt", "r") as f:
         while True:
             time.sleep(0.5)
-            print(f.read(1))
+            print(f"{f.readline()}", end="")
 
 # 在Windows下运行 multiprocessing 代码，如果不加 `if __name__ == "__main__":`，会疯狂递归创建进程，直接报错崩溃！
 if __name__ == "__main__": # 当前文件只有直接执行的时候,才会允许这里面的代码;如果是被import的,就不会执行
