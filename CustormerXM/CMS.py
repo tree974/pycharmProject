@@ -241,13 +241,13 @@ class CMS:
                     case "5":
                         self.display_customer()
                     case "6":
-                        print(f"{"\b \b"*100}退出客户管理系统")
+                        print("退出客户管理系统")
                         break
                     case _:
                         print(">> ???")
                         time.sleep(1)
         except(EOFError, KeyboardInterrupt):
-            print(f"{"\b \b"*100}退出客户管理系统")
+            print("退出客户管理系统")
 
 
 if __name__ == "__main__":

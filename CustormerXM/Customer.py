@@ -45,7 +45,8 @@ class Customer:
     def __str__(self):
         """打印客户信息"""
         return (f"Id: {self.id:<5}, Name: {self.name:<10}, Age: {self.age:<5}, Phone: {self.phone:<15}"
-                f", Email: {self.email:<25} ") # 多对引号拼接的字符串,每段引号前面都要加上f; 或者换成3引号方式"""""",前面只加一个f即可(但这种方式会保留换行符,打印出来也会存在换行符)
+                f", Email: {self.email:<25} ") # 多对引号拼接的字符串,每段引号前面都要加上f;
+        # 或者换成3引号方式"""""",前面只加一个f即可(但这种方式会保留换行符,打印出来也会存在换行符)
         # return (f"""Id: {self.id:<5}, Name: {self.name:<10}, Age: {self.age:<5}, Phone: {self.phone:<15}
         #         , Email: {self.email:<25} """)
 
